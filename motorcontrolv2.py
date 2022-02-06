@@ -2,9 +2,9 @@ import RPi.GPIO as GPIO
 import time
 
 # Pin Definitions
-output_pin = 18 # BOARD pin 12, BCM pin 18
+output_pin = 12 # BOARD pin 12
 
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BOARD)
 GPIO.setup(output_pin, GPIO.OUT, initial = GPIO.HIGH)
 print("Press CTRL+C to exit")
 
