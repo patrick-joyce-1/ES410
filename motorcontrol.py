@@ -20,9 +20,10 @@ def main():
             time.sleep(5)
             # Toggle the output every second
             print("Outputting {} to pin {}".format(curr_value_pin_a,motor_pin_a))
-            GPIO.output(motor_pin_a, curr_value_pin_a)
             curr_value_pin_a ^= GPIO.HIGH
+            GPIO.output(motor_pin_a, curr_value_pin_a)
             curr_value_pin_a ^= GPIO.LOW
+            GPIO.output(motor_pin_a,curr_value_pin_a)
     finally:
         GPIO.cleanup()
 
