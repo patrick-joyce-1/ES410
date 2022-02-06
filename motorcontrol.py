@@ -22,7 +22,6 @@ def main():
             print("Outputting {} to pin {}".format(curr_value_pin_a,motor_pin_a))
             GPIO.output(motor_pin_a, curr_value_pin_a)
             curr_value_pin_a ^= GPIO.HIGH
-            curr_value_pin_a ^= GPIO.LOW
     finally:
         GPIO.cleanup()
 
