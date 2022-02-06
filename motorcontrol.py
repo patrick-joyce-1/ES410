@@ -7,7 +7,7 @@ motor_pin_a = 18  # BOARD pin 12, BCM pin 18
 def main():
     # Pin Setup:
     # Board pin-numbering scheme
-    GPIO.setmode(GPIO.BCM)
+    GPIO.setmode(GPIO.BOARD)
     # Set both pins LOW to keep the motor idle
     # You can keep one of them HIGH and the LOW to start with rotation in one direction
     GPIO.setup(motor_pin_a, GPIO.OUT, initial=GPIO.LOW)
