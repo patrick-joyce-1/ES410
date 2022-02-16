@@ -61,10 +61,8 @@ def main():
                         motorposition -= 1.8
                     elif curr_value_pin_b == GPIO.HIGH:  # Clockwise
                         motorposition += 1.8
-                    time.sleep(0.1)
+                    time.sleep(0.25)
                     print("Motor position is: ", motorposition)
-
-            time.sleep(1)
 
     except KeyboardInterrupt:
         GPIO.cleanup()
