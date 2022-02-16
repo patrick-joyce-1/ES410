@@ -1,4 +1,4 @@
-import msvcrt, time
+import time
 import cv2
 import os
 import RPi.GPIO as GPIO
