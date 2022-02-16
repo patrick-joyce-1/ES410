@@ -40,21 +40,23 @@ def main():
 
             # Alignment system
             if abs(motorposition - pixelangle) > 0.9:  # if greater than highest precision
-                if motorposition > pixelangle:  # i.e. angle is less than current motor position
-                    # Set GPIO pin anti-clockwise
+                if motorposition > pixelangle:  # Set GPIO pin anti-clockwise
+                    curr_value_pin_b = GPIO.LOW
                     GPIO.output(motor_pin_b, 0)
                     print("anticlockwise")
-                elif motorposition < pixelangle:
-                    # Set GPIO pin clockwise
-                    GPIO.output(motor_pin_b, 1)
+                elif motorposition < pixelangle:  # Set GPIO pin clockwise
+                    curr_value_pin_b = GPIO.HIGH
+                    GPIO.output(motor_pin_b, curr_value_pin_b)
                     print("clockwise")
                 for i in range(1, int(round(abs(motorposition - pixelangle) / 1.8) + 1)):
                     # Set GPIO pin signal high-low
-                    GPIO.output(motor_pin_a, 1)
-                    GPIO.output(motor_pin_a, 0)
+                    curr_value_pin_a ^= GPIO.HIGH
+                    GPIO.output(motor_pin_a, curr_value_pin_a)
+                    curr_value_pin_a ^= GPIO.LOW
+                    GPIO.output(motor_pin_a, curr_value_pin_a)
                     motorposition += 1.8
-                    time.sleep(0.1)
-                print("Motor position is: ", motorposition)
+                    time.sleep(0.5)
+                    print("Motor position is: ", motorposition)
 
             time.sleep(1)
 
