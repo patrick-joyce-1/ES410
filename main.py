@@ -19,7 +19,7 @@ def main():
         GPIO.setup(motor_pin_a, GPIO.OUT, initial=GPIO.LOW)
         GPIO.setup(motor_pin_b, GPIO.OUT, initial=GPIO.LOW)
         
-        curr_value_pin_b = GPIO.LOW
+        curr_value_pin_a = GPIO.LOW
         curr_value_pin_b = GPIO.LOW
                 
         # Initialise variables
