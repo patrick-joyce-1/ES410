@@ -57,9 +57,9 @@ def main():
                     GPIO.output(motor_pin_a, curr_value_pin_a)
                     curr_value_pin_a ^= GPIO.LOW
                     GPIO.output(motor_pin_a, curr_value_pin_a)
-                    if curr_value_pin_b = GPIO.LOW:  # Anti-clockwise
+                    if curr_value_pin_b == GPIO.LOW:  # Anti-clockwise
                         motorposition -= 1.8
-                    elif curr_value_pin_b = GPIO.HIGH:  # Clockwise
+                    elif curr_value_pin_b == GPIO.HIGH:  # Clockwise
                         motorposition += 1.8
                     time.sleep(0.1)
                     print("Motor position is: ", motorposition)
