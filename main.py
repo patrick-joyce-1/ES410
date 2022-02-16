@@ -57,7 +57,7 @@ def main():
                     GPIO.output(motor_pin_a, curr_value_pin_a)
                     curr_value_pin_a ^= GPIO.LOW
                     GPIO.output(motor_pin_a, curr_value_pin_a)
-                    time.sleep(0.05)
+                    time.sleep(0.1)
                     curr_value_pin_a ^= GPIO.HIGH
                     GPIO.output(motor_pin_a, curr_value_pin_a)
                     curr_value_pin_a ^= GPIO.LOW
