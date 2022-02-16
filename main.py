@@ -48,7 +48,7 @@ def main():
                     # Set GPIO pin clockwise
                     GPIO.output(motor_pin_b, 1)
                     print("clockwise")
-                for i in range(1, round(abs(motorposition - pixelangle) / 1.8) + 1):
+                for i in range(1, int(round(abs(motorposition - pixelangle) / 1.8) + 1)):
                     # Set GPIO pin signal high-low
                     GPIO.output(motor_pin_a, 1)
                     GPIO.output(motor_pin_a, 0)
