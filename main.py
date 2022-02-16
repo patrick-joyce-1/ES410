@@ -2,7 +2,6 @@ import time
 import cv2
 import os
 import RPi.GPIO as GPIO
-import sleep
 
 ## Added a for loop within the if statements
 
