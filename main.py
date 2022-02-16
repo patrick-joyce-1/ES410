@@ -18,7 +18,10 @@ def main():
         # Set both pins to LOW
         GPIO.setup(motor_pin_a, GPIO.OUT, initial=GPIO.LOW)
         GPIO.setup(motor_pin_b, GPIO.OUT, initial=GPIO.LOW)
-
+        
+        curr_value_pin_b = GPIO.LOW
+        curr_value_pin_b = GPIO.LOW
+                
         # Initialise variables
         camerafov = 60  # FOV (degrees)
         camerares = [1920, 1080]  # Resolution
