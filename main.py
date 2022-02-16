@@ -14,7 +14,7 @@ def main():
     try:
         # Pin Setup
         # Board pin-numbering scheme
-        GPIO.setmode(GPIO.BCM)
+        GPIO.setmode(GPIO.BOARD)
         # Set both pins to LOW
         GPIO.setup(motor_pin_a, GPIO.OUT, initial=GPIO.LOW)
         GPIO.setup(motor_pin_b, GPIO.OUT, initial=GPIO.LOW)
