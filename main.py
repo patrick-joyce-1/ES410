@@ -53,7 +53,7 @@ def main():
                     GPIO.output(motor_pin_a, 1)
                     GPIO.output(motor_pin_a, 0)
                     motorposition += 1.8
-                    time.sleep(0.01)
+                    time.sleep(0.1)
                 print("Motor position is: ", motorposition)
 
             time.sleep(1)
