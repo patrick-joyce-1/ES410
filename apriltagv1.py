@@ -1,6 +1,6 @@
 import apriltag
 import cv2
-img = cv2.imread('photo.png'.cv2.IMREAD_GRAYSCALE)
+img = cv2.imread('photo.png')
 detector = apriltag.Detector()
 result = detector.detect(img)
 
