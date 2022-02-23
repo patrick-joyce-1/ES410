@@ -105,10 +105,10 @@ def main():
                         motorposition += 1.8
                     #time.sleep(1)
                     print("Motor position is: ", motorposition)
+            vid.release()  # After the loop release the cap object        
 
     except KeyboardInterrupt:
         GPIO.cleanup()
-        vid.release()  # After the loop release the cap object
 
 
 if __name__ == '__main__':
