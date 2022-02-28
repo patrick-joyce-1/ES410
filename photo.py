@@ -26,14 +26,17 @@ def gstreamer_pipeline(
         )
     )
 
+# Define acquired photo file-name
 filename = 'photo.jpg'
 
-# define a video capture object
+# Define a video capture object for the photo
 vid = cv2.VideoCapture(gstreamer_pipeline(flip_method=2), cv2.CAP_GSTREAMER)
 
-# Capture the video frame by frame
+# Capture the video-output from the camera
 ret, frame = vid.read()
 
-cv2.imwrite(filename, frame)  # Using cv2.imwrite() method to the image
+# Write the frame into the file-name previously defined
+cv2.imwrite(filename, frame)  
 
-vid.release()  # After the loop release the cap object
+# Release the video capture object
+vid.release()  
