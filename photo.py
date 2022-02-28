@@ -1,4 +1,4 @@
-import cv2  # import the opencv libraryr
+import cv2  # import the opencv library
 def gstreamer_pipeline(
     capture_width=1920,
     capture_height=1080,
