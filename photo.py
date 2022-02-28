@@ -26,7 +26,7 @@ def gstreamer_pipeline(
         )
     )
 
-filename = 'savedImage.jpg'
+filename = 'photo.jpg'
 
 # define a video capture object
 vid = cv2.VideoCapture(gstreamer_pipeline(flip_method=2), cv2.CAP_GSTREAMER)
