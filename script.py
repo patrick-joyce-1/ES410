@@ -16,11 +16,11 @@ motor_pin_a = 18  # BOARD pin 18
 motor_pin_b = 12  # BOARD pin 12
 
 def gstreamer_pipeline(
-    capture_width=1920,
-    capture_height=1080,
-    display_width=1920,
-    display_height=1080,
-    framerate=30,
+    capture_width=1080,
+    capture_height=720,
+    display_width=1080,
+    display_height=720,
+    framerate=60,
     flip_method=0,
 ):
     return (
@@ -56,7 +56,7 @@ def main():
                 
         # Initialise variables
         camerafov = 60  # FOV (degrees)
-        camerares = [1920, 1080]  # Resolution
+        camerares = [1080, 720]  # Resolution
         app = camerafov / camerares[0]  # Angle per pixel
         motorposition = 0  # Motor angle
 
@@ -70,22 +70,22 @@ def main():
             cv2.imwrite(filename, frame)  # Using cv2.imwrite() method to the image
             
             # Apriltag position system
-            img = Image.open('photo.jpeg')
+            img = Image.open('photo.jpg')
             imggrey = img.convert('L')
             data = asarray(imggrey)
             detector = apriltag.Detector()
             result = detector.detect(data)
             pixel = result[0][6][0]
-            pixelangle = (pixel - 960) * app
+            pixelangle = (pixel - 540) * app
             
             # Alignment system
             if abs(motorposition - pixelangle) > 0.9:  # if greater than highest precision
                 if motorposition > pixelangle:  # Set GPIO pin anti-clockwise
-                    curr_value_pin_b = GPIO.LOW
-                    GPIO.output(motor_pin_b, 0)
+                    curr_value_pin_b = GPIO.HIGH
+                    GPIO.output(motor_pin_b, curr_value_pin_b)
                     print("anticlockwise")
                 elif motorposition < pixelangle:  # Set GPIO pin clockwise
-                    curr_value_pin_b = GPIO.HIGH
+                    curr_value_pin_b = GPIO.LOW
                     GPIO.output(motor_pin_b, curr_value_pin_b)
                     print("clockwise")
                 for i in range(1, int(round(abs(motorposition - pixelangle) / 1.8) + 1)):
@@ -99,9 +99,9 @@ def main():
                     GPIO.output(motor_pin_a, curr_value_pin_a)
                     curr_value_pin_a ^= GPIO.LOW
                     GPIO.output(motor_pin_a, curr_value_pin_a)
-                    if curr_value_pin_b == GPIO.LOW:  # Anti-clockwise
+                    if curr_value_pin_b == GPIO.HIGH:  # Anti-clockwise
                         motorposition -= 1.8
-                    elif curr_value_pin_b == GPIO.HIGH:  # Clockwise
+                    elif curr_value_pin_b == GPIO.LOW:  # Clockwise
                         motorposition += 1.8
                     #time.sleep(1)
                     print("Motor position is: ", motorposition)
