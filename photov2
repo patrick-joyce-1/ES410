@@ -1,0 +1,20 @@
+import cv2  # import the opencv library
+# gstreamer_pipeline returns a GStreamer pipeline for capturing from the CSI camera
+
+# Define acquired photo file-name
+filename = 'photo.jpg'
+
+# Define Camera Settings
+camSet = 'nvarguscamerasrc ! video/x-raw(memory:NVMM), width=1920, height=1080, format=NV12, framerate=30/1 ! nvvidconv flip-method=0 ! video/x-raw, width=1920, height=1080, format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink"
+
+# Define a video capture object for the photo
+vid = cv2.VideoCapture(camSet, cv2.CAP_GSTREAMER) # Set flip_method=2 to rotate the image 180 degrees
+
+# Capture the video-output from the camera
+ret, frame = vid.read()
+
+# Write the frame into the file-name previously defined
+cv2.imwrite(filename, frame)  
+
+# Release the video capture object
+vid.release()  
