@@ -79,7 +79,7 @@ def main():
             pixelangle = (pixel - 540) * app
             
             # Alignment system
-            if abs(motorposition - pixelangle) > 0.9:  # if greater than highest precision
+            if abs(motorposition - pixelangle) > 1.8:  # if greater than highest precision
                 if motorposition > pixelangle:  # Set GPIO pin anti-clockwise
                     curr_value_pin_b = GPIO.HIGH
                     GPIO.output(motor_pin_b, curr_value_pin_b)
@@ -100,9 +100,9 @@ def main():
                     curr_value_pin_a ^= GPIO.LOW
                     GPIO.output(motor_pin_a, curr_value_pin_a)
                     if curr_value_pin_b == GPIO.HIGH:  # Anti-clockwise
-                        motorposition -= 1.8
+                        motorposition -= 3.6
                     elif curr_value_pin_b == GPIO.LOW:  # Clockwise
-                        motorposition += 1.8
+                        motorposition += 3.6
                     #time.sleep(1)
                     print("Motor position is: ", motorposition)
             vid.release()  # After the loop release the cap object        
