@@ -75,39 +75,62 @@ def main():
             data = asarray(imggrey)
             detector = apriltag.Detector()
             result = detector.detect(data)
-            pixel = result[0][6][0]
-            pixelangle = (pixel - 540) * app
-            
-            # Alignment system
-            if abs(motorposition - pixelangle) > 1.8:  # if greater than highest precision
-                if motorposition > pixelangle:  # Set GPIO pin anti-clockwise
-                    curr_value_pin_b = GPIO.HIGH
-                    GPIO.output(motor_pin_b, curr_value_pin_b)
-                    print("anticlockwise")
-                elif motorposition < pixelangle:  # Set GPIO pin clockwise
-                    curr_value_pin_b = GPIO.LOW
-                    GPIO.output(motor_pin_b, curr_value_pin_b)
-                    print("clockwise")
-                for i in range(1, int(round(abs(motorposition - pixelangle) / 3.6) + 1)):
-                    # Set GPIO pin signal high-low
-                    curr_value_pin_a ^= GPIO.HIGH
-                    GPIO.output(motor_pin_a, curr_value_pin_a)
-                    curr_value_pin_a ^= GPIO.LOW
-                    GPIO.output(motor_pin_a, curr_value_pin_a)
-                    time.sleep(0.05)
-                    curr_value_pin_a ^= GPIO.HIGH
-                    GPIO.output(motor_pin_a, curr_value_pin_a)
-                    curr_value_pin_a ^= GPIO.LOW
-                    GPIO.output(motor_pin_a, curr_value_pin_a)
-                    if curr_value_pin_b == GPIO.HIGH:  # Anti-clockwise
-                        motorposition -= 3.6
-                    elif curr_value_pin_b == GPIO.LOW:  # Clockwise
-                        motorposition += 3.6
-                    #time.sleep(1)
-                    print("Motor position is: ", motorposition)
-            vid.release()  # After the loop release the cap object        
+            if type(result) == list:
+                pixel = result[0][6][0]
+                pixelangle = (pixel - 540) * app
+
+                # Alignment system
+                if abs(motorposition - pixelangle) > 1.8:  # if greater than highest precision
+                    if motorposition > pixelangle:  # Set GPIO pin anti-clockwise
+                        curr_value_pin_b = GPIO.HIGH
+                        GPIO.output(motor_pin_b, curr_value_pin_b)
+                        print("anticlockwise")
+                    elif motorposition < pixelangle:  # Set GPIO pin clockwise
+                        curr_value_pin_b = GPIO.LOW
+                        GPIO.output(motor_pin_b, curr_value_pin_b)
+                        print("clockwise")
+                    for i in range(1, int(round(abs(motorposition - pixelangle) / 3.6) + 1)):
+                        # Set GPIO pin signal high-low
+                        curr_value_pin_a ^= GPIO.HIGH
+                        GPIO.output(motor_pin_a, curr_value_pin_a)
+                        curr_value_pin_a ^= GPIO.LOW
+                        GPIO.output(motor_pin_a, curr_value_pin_a)
+                        time.sleep(0.05)
+                        curr_value_pin_a ^= GPIO.HIGH
+                        GPIO.output(motor_pin_a, curr_value_pin_a)
+                        curr_value_pin_a ^= GPIO.LOW
+                        GPIO.output(motor_pin_a, curr_value_pin_a)
+                        if curr_value_pin_b == GPIO.HIGH:  # Anti-clockwise
+                            motorposition -= 3.6
+                        elif curr_value_pin_b == GPIO.LOW:  # Clockwise
+                            motorposition += 3.6
+                        print("Motor position is: ", motorposition)
+                vid.release()  # After the loop release the cap object        
 
     except KeyboardInterrupt:
+        while round(motorposition) != 0:
+            if motorposition > 0: # Anti-clockwise
+                curr_value_pin_b = GPIO.HIGH
+                GPIO.output(motor_pin_b, curr_value_pin_b)
+            elif motorposition < 0: # Clockwise
+                curr_value_pin_b = GPIO.LOW
+                GPIO.output(motor_pin_b, curr_value_pin_b)       
+            for i in range(1,int(round(abs(motorposition)/3.6)+1)):
+                # Set GPIO pin signal high-low
+                curr_value_pin_a ^= GPIO.HIGH
+                GPIO.output(motor_pin_a, curr_value_pin_a)
+                curr_value_pin_a ^= GPIO.LOW
+                GPIO.output(motor_pin_a, curr_value_pin_a)
+                time.sleep(0.05)
+                curr_value_pin_a ^= GPIO.HIGH
+                GPIO.output(motor_pin_a, curr_value_pin_a)
+                curr_value_pin_a ^= GPIO.LOW
+                GPIO.output(motor_pin_a, curr_value_pin_a)
+                if curr_value_pin_b == GPIO.HIGH:  # Anti-clockwise
+                    motorposition -= 3.6
+                elif curr_value_pin_b == GPIO.LOW:  # Clockwise
+                    motorposition += 3.6
+            
         GPIO.cleanup()
 
 
