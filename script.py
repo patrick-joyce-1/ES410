@@ -88,7 +88,7 @@ def main():
                     curr_value_pin_b = GPIO.LOW
                     GPIO.output(motor_pin_b, curr_value_pin_b)
                     print("clockwise")
-                for i in range(1, int(round(abs(motorposition - pixelangle) / 1.8) + 1)):
+                for i in range(1, int(round(abs(motorposition - pixelangle) / 3.6) + 1)):
                     # Set GPIO pin signal high-low
                     curr_value_pin_a ^= GPIO.HIGH
                     GPIO.output(motor_pin_a, curr_value_pin_a)
